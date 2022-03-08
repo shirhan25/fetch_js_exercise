@@ -22,9 +22,9 @@ const loadData = () => {
 
 .then (() => { 
 
-//MAKING INFORMATION TO APPEAR FROM OUR API TO OUR DOMO 
+//MAKING FLIGHT DETAIL TO APPEAR FROM OUR API TO OUR DOMO 
 
-
+console.log("Flight details loading ..." );
 //taking in no parameters but run everything defined inside of the function when resolved 
 const list = document.querySelector("#flight-detail-list")
 // declaring a variable called list and searching the document for details on the flight detail list id
@@ -55,15 +55,62 @@ listDetails.innerText = details;
 //adding the list of flight details at the end of the list in our document 
 list.appendChild(listDetails)
 
-}).catch(error => console.error("Sorry but information is unavailable"))
+})
 
 //we want catch to be called if our promise is rejected & the error to be caught.
 
 
 
+//Making a link to an article about the launch appear in our document 
+}).then(() => {
+
+    console.log("Flight article link loading ...");
+    const list = document.querySelector("#flight-article-link")
+
+    //we want to access the array of flights and use map to transform the items in the array by getting the 
+    // flight article links in a new array called articleList
+ const articleList = flights.map(flight => {
+     return flight.links.article 
+ })
+
+
+//loop around the aritclelist array and for each item (article), we want to :
+//create a list element in our document 
+//then put in the text of our item (article) as the newly created list
+//then append the list to the end of the list we made in our document
+ 
+articleList.forEach((article ) => {
+
+const listArticle = document.createElement("li");
+
+listArticle.innerText = article;
+
+list.appendChild(listArticle)
 
 })
+
+
+
+}).then(() => {
+ console.log("Date of Flight loading ...");
+
+const list = document.querySelector("#flight-local-date")
+
+const localDateList = flights.map (flight => {
+    return flight.date_local})
+
+    localDateList.forEach((date) => {
+const listDate = document.createElement("li")
+listDate.innerText = date;
+list.appendChild(listDate)
+})
+})
+
+/// Making the dates of the launches appear in our document 
+
 }
+
+
 
 
 //call the function 
